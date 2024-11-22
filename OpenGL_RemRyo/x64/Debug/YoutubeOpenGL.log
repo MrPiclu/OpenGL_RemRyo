@@ -1,0 +1,45 @@
+﻿  Camera.cpp
+C:\Users\KimLeeHyun\Documents\GitHub\YoutubeOpenGL\Camera.cpp(1,10): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+  Dragging.cpp
+  EBO.cpp
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw.cpp
+  imgui_impl_opengl3.cpp
+  imgui_tables.cpp
+  imgui_widgets.cpp
+  Main.cpp
+  Mesh.cpp
+C:\Users\KimLeeHyun\Documents\GitHub\YoutubeOpenGL\Mesh.cpp(59,43): warning C4267: '인수': 'size_t'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Model.cpp
+  shaderClass.cpp
+  stb.cpp
+  Texture.cpp
+  VAO.cpp
+C:\Users\KimLeeHyun\Documents\GitHub\YoutubeOpenGL\VAO.cpp(11,64): warning C4244: '인수': 'GLsizeiptr'에서 'GLsizei'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  VBO.cpp
+  코드를 생성하고 있습니다...
+  glad.c
+glfw3.lib(input.obj) : warning LNK4099: '' PDB를 'glfw3.lib(input.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(init.obj) : warning LNK4099: '' PDB를 'glfw3.lib(init.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(window.obj) : warning LNK4099: '' PDB를 'glfw3.lib(window.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_window.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_window.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(context.obj) : warning LNK4099: '' PDB를 'glfw3.lib(context.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_time.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_time.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_thread.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_thread.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(platform.obj) : warning LNK4099: '' PDB를 'glfw3.lib(platform.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(monitor.obj) : warning LNK4099: '' PDB를 'glfw3.lib(monitor.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(vulkan.obj) : warning LNK4099: '' PDB를 'glfw3.lib(vulkan.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_init.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_init.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_monitor.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_monitor.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(wgl_context.obj) : warning LNK4099: '' PDB를 'glfw3.lib(wgl_context.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(egl_context.obj) : warning LNK4099: '' PDB를 'glfw3.lib(egl_context.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(osmesa_context.obj) : warning LNK4099: '' PDB를 'glfw3.lib(osmesa_context.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(null_init.obj) : warning LNK4099: '' PDB를 'glfw3.lib(null_init.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_module.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_module.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(win32_joystick.obj) : warning LNK4099: '' PDB를 'glfw3.lib(win32_joystick.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(null_monitor.obj) : warning LNK4099: '' PDB를 'glfw3.lib(null_monitor.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(null_window.obj) : warning LNK4099: '' PDB를 'glfw3.lib(null_window.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+glfw3.lib(null_joystick.obj) : warning LNK4099: '' PDB를 'glfw3.lib(null_joystick.obj)' 또는 ''에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+  YoutubeOpenGL.vcxproj -> C:\Users\KimLeeHyun\Documents\GitHub\YoutubeOpenGL\x64\Debug\YoutubeOpenGL.exe

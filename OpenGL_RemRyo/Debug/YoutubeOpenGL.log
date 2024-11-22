@@ -1,0 +1,33 @@
+﻿  Camera.cpp
+C:\Users\KimLeeHyun\Programming\YoutubeOpenGL\Camera.cpp(1,10): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+  EBO.cpp
+  Main.cpp
+  Mesh.cpp
+  Model.cpp
+  shaderClass.cpp
+C:\Users\KimLeeHyun\Programming\YoutubeOpenGL\shaderClass.cpp(10,27): warning C4244: '인수': 'std::streamoff'에서 'const unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  stb.cpp
+  Texture.cpp
+  VAO.cpp
+  VBO.cpp
+  코드를 생성하고 있습니다...
+  glad.c
+Camera.obj : error LNK2019: _glfwSetInputMode"public: void __thiscall Camera::Inputs(struct GLFWwindow *)" (?Inputs@Camera@@QAEXPAUGLFWwindow@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Camera.obj : error LNK2019: _glfwGetKey"public: void __thiscall Camera::Inputs(struct GLFWwindow *)" (?Inputs@Camera@@QAEXPAUGLFWwindow@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Camera.obj : error LNK2019: _glfwGetMouseButton"public: void __thiscall Camera::Inputs(struct GLFWwindow *)" (?Inputs@Camera@@QAEXPAUGLFWwindow@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Camera.obj : error LNK2019: _glfwGetCursorPos"public: void __thiscall Camera::Inputs(struct GLFWwindow *)" (?Inputs@Camera@@QAEXPAUGLFWwindow@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Camera.obj : error LNK2019: _glfwSetCursorPos"public: void __thiscall Camera::Inputs(struct GLFWwindow *)" (?Inputs@Camera@@QAEXPAUGLFWwindow@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwInit_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwTerminate_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwWindowHint_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwCreateWindow_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwDestroyWindow_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwWindowShouldClose_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwPollEvents_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwMakeContextCurrent_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Main.obj : error LNK2019: _glfwSwapBuffers_main 함수에서 참조되는 확인할 수 없는 외부 기호
+Model.obj : error LNK2019: "public: __thiscall Assimp::Importer::Importer(void)" (??0Importer@Assimp@@QAE@XZ)"private: bool __thiscall Model::LoadByAssimp(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?LoadByAssimp@Model@@AAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Model.obj : error LNK2019: "public: __thiscall Assimp::Importer::~Importer(void)" (??1Importer@Assimp@@QAE@XZ)"private: bool __thiscall Model::LoadByAssimp(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?LoadByAssimp@Model@@AAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+Model.obj : error LNK2019: "public: struct aiScene const * __thiscall Assimp::Importer::ReadFile(char const *,unsigned int)" (?ReadFile@Importer@Assimp@@QAEPBUaiScene@@PBDI@Z)"public: struct aiScene const * __thiscall Assimp::Importer::ReadFile(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned int)" (?ReadFile@Importer@Assimp@@QAEPBUaiScene@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@I@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+C:\Users\KimLeeHyun\Programming\YoutubeOpenGL\Libraries\lib\glfw3.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\KimLeeHyun\Programming\YoutubeOpenGL\Debug\YoutubeOpenGL.exe : fatal error LNK1120: 17개의 확인할 수 없는 외부 참조입니다.

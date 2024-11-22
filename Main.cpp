@@ -74,7 +74,7 @@ int main() {
 	OnFramebufferSizeChange(window, framebufferWidth, framebufferHeight);
 
 	std::string parentDir = (fs::current_path().fs::path::parent_path()).string();
-	std::string texPath = "/YoutubeOpenGL/";
+	std::string texPath = "/OpenGL_RemRyo/";
 
 	Texture face[]
 	{

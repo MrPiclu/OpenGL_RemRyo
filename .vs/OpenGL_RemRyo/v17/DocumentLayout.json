@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|solutionrelative:Mesh.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp",
+              "RelativeDocumentMoniker": "Main.cpp",
+              "ToolTip": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp",
+              "RelativeToolTip": "Main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-22T09:03:28.984Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Mesh.cpp",
+              "DocumentMoniker": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Mesh.cpp",
+              "RelativeDocumentMoniker": "Mesh.cpp",
+              "ToolTip": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Mesh.cpp",
+              "RelativeToolTip": "Mesh.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-22T09:03:28.455Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
