@@ -1,76 +1,158 @@
 #include "gjk.h"
+#include <cfloat>
 
-// 예시: 지원 함수
-glm::vec3 Support(const std::vector<glm::vec3>& vertices, const glm::vec3& direction) {
+// Support function for a single shape
+glm::vec3 GJK::Support(const std::vector<glm::vec3>& vertices, const glm::vec3& direction) {
     float maxDot = -FLT_MAX;
-    glm::vec3 supportPoint;
+    glm::vec3 bestVertex;
+
     for (const auto& vertex : vertices) {
-        float dot = glm::dot(vertex, direction);
-        if (dot > maxDot) {
-            maxDot = dot;
-            supportPoint = vertex;
+        float dotProduct = glm::dot(vertex, direction);
+        if (dotProduct > maxDot) {
+            maxDot = dotProduct;
+            bestVertex = vertex;
         }
     }
-    return supportPoint;
+
+    return bestVertex;
 }
 
-glm::vec3 SupportMinkowski(const std::vector<glm::vec3>& verticesA, const std::vector<glm::vec3>& verticesB, const glm::vec3& direction) {
+// Support function for the Minkowski Difference of two shapes
+glm::vec3 GJK::SupportMinkowski(const std::vector<glm::vec3>& verticesA, const std::vector<glm::vec3>& verticesB, const glm::vec3& direction) {
     glm::vec3 supportA = Support(verticesA, direction);
     glm::vec3 supportB = Support(verticesB, -direction);
     return supportA - supportB;
 }
 
-bool GJK(const std::vector<glm::vec3>& verticesA, const std::vector<glm::vec3>& verticesB) {
-    // 초기 방향 벡터 선택
-    glm::vec3 direction = glm::vec3(1, 0, 0);
-
-    // 첫 번째 지원점 계산
-    glm::vec3 support = SupportMinkowski(verticesA, verticesB, direction);
+// Main GJK collision detection function
+bool GJK::Gjk(const std::vector<glm::vec3>& verticesA, const std::vector<glm::vec3>& verticesB) {
+    glm::vec3 direction(1.0f, 0.0f, 0.0f); // Initial arbitrary direction
     std::vector<glm::vec3> simplex;
-    simplex.push_back(support);
 
-    // 방향을 원점에서 심플렉스로 향하도록 반전
-    direction = -support;
+    // Initial support point
+    glm::vec3 point = SupportMinkowski(verticesA, verticesB, direction);
+    simplex.push_back(point);
+
+    direction = -point; // New direction towards the origin
 
     while (true) {
-        support = SupportMinkowski(verticesA, verticesB, direction);
-        if (glm::dot(support, direction) <= 0) {
-            // 원점이 Minkowski 차집합 외부에 있음
-            return false; // 충돌 없음
+        glm::vec3 newPoint = SupportMinkowski(verticesA, verticesB, direction);
+
+        if (glm::dot(newPoint, direction) <= 0) {
+            return false; // No collision
         }
-        simplex.push_back(support);
+
+        simplex.push_back(newPoint);
+
         if (HandleSimplex(simplex, direction)) {
-            return true; // 충돌 발생
+            return true; // Collision detected
         }
     }
 }
 
-bool HandleSimplex(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
-    // 심플렉스의 형태에 따라 처리
+// Handle the simplex based on its size
+bool GJK::HandleSimplex(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
     if (simplex.size() == 2) {
-        // 선분 처리
         return LineCase(simplex, direction);
     }
     else if (simplex.size() == 3) {
-        // 삼각형 처리
         return TriangleCase(simplex, direction);
     }
     else if (simplex.size() == 4) {
-        // 사면체 처리
         return TetrahedronCase(simplex, direction);
     }
     return false;
 }
 
+// Handle the line case
+bool GJK::LineCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
+    glm::vec3 A = simplex[1];
+    glm::vec3 B = simplex[0];
+    glm::vec3 AB = B - A;
+    glm::vec3 AO = -A;
 
-bool LineCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
-    
+    if (glm::dot(AB, AO) > 0) {
+        direction = glm::cross(glm::cross(AB, AO), AB);
+    }
+    else {
+        simplex = { A };
+        direction = AO;
+    }
+
+    return false;
 }
 
-bool TriangleCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
+// Handle the triangle case
+bool GJK::TriangleCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
+    glm::vec3 A = simplex[2];
+    glm::vec3 B = simplex[1];
+    glm::vec3 C = simplex[0];
+    glm::vec3 AB = B - A;
+    glm::vec3 AC = C - A;
+    glm::vec3 AO = -A;
 
+    glm::vec3 ABC = glm::cross(AB, AC);
+
+    // Check if origin is outside AB
+    glm::vec3 ABPerp = glm::cross(ABC, AB);
+    if (glm::dot(ABPerp, AO) > 0) {
+        simplex = { A, B };
+        return LineCase(simplex, direction);
+    }
+
+    // Check if origin is outside AC
+    glm::vec3 ACPerp = glm::cross(AC, ABC);
+    if (glm::dot(ACPerp, AO) > 0) {
+        simplex = { A, C };
+        return LineCase(simplex, direction);
+    }
+
+    // Origin is inside triangle
+    if (glm::dot(ABC, AO) > 0) {
+        direction = ABC;
+    }
+    else {
+        direction = -ABC;
+        std::swap(simplex[0], simplex[1]);
+    }
+
+    return false;
 }
 
-bool TetrahedronCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
+// Handle the tetrahedron case
+bool GJK::TetrahedronCase(std::vector<glm::vec3>& simplex, glm::vec3& direction) {
+    glm::vec3 A = simplex[3];
+    glm::vec3 B = simplex[2];
+    glm::vec3 C = simplex[1];
+    glm::vec3 D = simplex[0];
+    glm::vec3 AO = -A;
 
+    // Faces
+    glm::vec3 ABC = glm::cross(B - A, C - A);
+    glm::vec3 ACD = glm::cross(C - A, D - A);
+    glm::vec3 ADB = glm::cross(D - A, B - A);
+
+    bool aboveABC = glm::dot(ABC, AO) > 0;
+    bool aboveACD = glm::dot(ACD, AO) > 0;
+    bool aboveADB = glm::dot(ADB, AO) > 0;
+
+    if (aboveABC) {
+        simplex = { A, B, C };
+        direction = ABC;
+        return TriangleCase(simplex, direction);
+    }
+
+    if (aboveACD) {
+        simplex = { A, C, D };
+        direction = ACD;
+        return TriangleCase(simplex, direction);
+    }
+
+    if (aboveADB) {
+        simplex = { A, D, B };
+        direction = ADB;
+        return TriangleCase(simplex, direction);
+    }
+
+    return true; // Collision detected
 }

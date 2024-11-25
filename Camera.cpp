@@ -1,6 +1,5 @@
 #include "Camera.h"'
 
-
 Camera::Camera(int width, int height, glm::vec3 position)
 {
 	Camera::width = width;
@@ -39,11 +38,12 @@ void Camera::Matrix(Shader& shader, const char* uniform) {
 
 }
 
-void Camera::Inputs(GLFWwindow* window, ImGuiIO& io)
+void Camera::Inputs(GLFWwindow* window, ImGuiIO& io, glm::mat4& transform)
 {
+
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
-		Position += speed * Orientation;
+		Position += speed * Orientation; 
 	}
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 	{
@@ -72,6 +72,18 @@ void Camera::Inputs(GLFWwindow* window, ImGuiIO& io)
 	else if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_RELEASE)
 	{
 		speed = origin_speed;
+	}
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+	{
+		printf("Pressed U\n");
+		transform = glm::translate(transform, glm::vec3(0.0f, 0.01f, 0.0f));
+		objPos = transform;
+	}
+	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
+	{
+        printf("Pressed J\n");
+		transform = glm::translate(transform, glm::vec3(0.0f, -0.01f, 0.0f));
+		objPos = transform;
 	}
 
 

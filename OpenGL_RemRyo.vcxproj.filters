@@ -87,6 +87,9 @@
     <ClCompile Include="Dragging.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="gjk.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.vert">
@@ -101,19 +104,26 @@
     <None Include="light.vert">
       <Filter>리소스 파일\Shaders</Filter>
     </None>
-    <None Include="..\..\Downloads\backpack\backpack.mtl">
+    <None Include="imgui.ini" />
+    <None Include="transparent.vert">
+      <Filter>리소스 파일\Shaders</Filter>
+    </None>
+    <None Include="transparent.frag">
+      <Filter>리소스 파일\Shaders</Filter>
+    </None>
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemHairOriginFixed.mtl">
       <Filter>리소스 파일\Models</Filter>
     </None>
-    <None Include="Models\Rem_Hair.mtl">
+    <None Include="E:\Project Files\Blender\Exports\Convex.mtl">
       <Filter>리소스 파일\Models</Filter>
     </None>
-    <None Include="Models\Rem.mtl">
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemEyeRightOriginFixed.mtl">
       <Filter>리소스 파일\Models</Filter>
     </None>
-    <None Include="E:\Project Files\Blender\Exports\Rem_Hair1.mtl">
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemEyeLeftOriginFixed.mtl">
       <Filter>리소스 파일\Models</Filter>
     </None>
-    <None Include="E:\Project Files\Blender\Exports\Rem1.mtl">
+    <None Include="Models\RemOriginFixed.mtl">
       <Filter>리소스 파일\Models</Filter>
     </None>
   </ItemGroup>
@@ -169,6 +179,9 @@
     <ClInclude Include="Dragging.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="gjk.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="ryo_thumbup.png">
@@ -207,30 +220,30 @@
     <Image Include="E:\Project Files\Blender\Project Files\Anime\Skin Base Color.png">
       <Filter>리소스 파일\Models</Filter>
     </Image>
-    <Image Include="E:\Project Files\Blender\Project Files\Anime\Hair_Blue.png">
-      <Filter>리소스 파일\Models</Filter>
-    </Image>
     <Image Include="Models\Skin Base Color1.png">
       <Filter>리소스 파일\Models</Filter>
     </Image>
     <Image Include="Models\Hair_Blue1.png">
       <Filter>리소스 파일\Models</Filter>
     </Image>
+    <Image Include="grey.png">
+      <Filter>리소스 파일\Textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\..\Downloads\backpack\backpack.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemHairOriginFixed.obj">
       <Filter>리소스 파일\Models</Filter>
     </Object>
-    <Object Include="Models\Rem_Hair.obj">
+    <Object Include="E:\Project Files\Blender\Exports\Convex.obj">
       <Filter>리소스 파일\Models</Filter>
     </Object>
-    <Object Include="Models\Rem.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemEyeLeftOriginFixed.obj">
       <Filter>리소스 파일\Models</Filter>
     </Object>
-    <Object Include="E:\Project Files\Blender\Exports\Rem_Hair1.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemEyeRightOriginFixed.obj">
       <Filter>리소스 파일\Models</Filter>
     </Object>
-    <Object Include="E:\Project Files\Blender\Exports\Rem1.obj">
+    <Object Include="Models\RemOriginFixed.obj">
       <Filter>리소스 파일\Models</Filter>
     </Object>
   </ItemGroup>

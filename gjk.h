@@ -16,14 +16,6 @@ class GJK
 public:
 	std::vector<glm::vec3> vertice;
 
-	struct simplex
-	{
-		glm::vec3 a;
-		glm::vec3 b;
-		glm::vec3 c;
-		glm::vec3 d;
-	};
-
 	int width;
 	int height;
 

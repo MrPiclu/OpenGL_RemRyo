@@ -157,6 +157,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Dragging.cpp" />
     <ClCompile Include="EBO.cpp" />
+    <ClCompile Include="gjk.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -175,20 +176,24 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\Downloads\backpack\backpack.mtl" />
     <None Include="default.frag" />
     <None Include="default.vert" />
-    <None Include="E:\Project Files\Blender\Exports\Rem1.mtl" />
-    <None Include="E:\Project Files\Blender\Exports\Rem_Hair1.mtl" />
+    <None Include="E:\Project Files\Blender\Exports\Convex.mtl" />
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemEyeLeftOriginFixed.mtl" />
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemEyeRightOriginFixed.mtl" />
+    <None Include="E:\Project Files\Blender\Project Files\Anime\RemHairOriginFixed.mtl" />
+    <None Include="imgui.ini" />
     <None Include="light.frag" />
     <None Include="light.vert" />
-    <None Include="Models\Rem.mtl" />
-    <None Include="Models\Rem_Hair.mtl" />
+    <None Include="Models\RemOriginFixed.mtl" />
+    <None Include="transparent.frag" />
+    <None Include="transparent.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Dragging.h" />
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="gjk.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
@@ -212,8 +217,8 @@
     <Image Include="..\..\Downloads\backpack\specular.jpg" />
     <Image Include="..\..\Downloads\ryo.jpg" />
     <Image Include="brick.png" />
-    <Image Include="E:\Project Files\Blender\Project Files\Anime\Hair_Blue.png" />
     <Image Include="E:\Project Files\Blender\Project Files\Anime\Skin Base Color.png" />
+    <Image Include="grey.png" />
     <Image Include="Models\Hair_Blue1.png" />
     <Image Include="Models\Skin Base Color1.png" />
     <Image Include="planks.png" />
@@ -222,31 +227,31 @@
     <Image Include="ryo_thumbup.png" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="..\..\Downloads\backpack\backpack.obj">
+    <Object Include="E:\Project Files\Blender\Exports\Convex.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="E:\Project Files\Blender\Exports\Rem1.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemEyeLeftOriginFixed.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="E:\Project Files\Blender\Exports\Rem_Hair1.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemEyeRightOriginFixed.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="Models\Rem.obj">
+    <Object Include="E:\Project Files\Blender\Project Files\Anime\RemHairOriginFixed.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </Object>
-    <Object Include="Models\Rem_Hair.obj">
+    <Object Include="Models\RemOriginFixed.obj">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

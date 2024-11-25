@@ -14,6 +14,7 @@ uniform sampler2D specular0;
 uniform vec4 lightColor; //빛 색상
 uniform vec3 lightPos; //빛 위치
 uniform vec3 camPos; //카메라 위치 (반사광(specular) 계산에 사용)
+uniform float transparency ; // 투명도 유니폼 추가
 
 vec4 pointLight()
 {
@@ -89,4 +90,5 @@ void main()
 {
 	// outputs final color
 	FragColor = pointLight();
+	FragColor.a = transparency;
 }
