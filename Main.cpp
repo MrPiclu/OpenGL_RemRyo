@@ -3,6 +3,7 @@ namespace fs = std::filesystem;
 
 #include "Mesh.h"
 #include "Model.h"
+#include "gjk.h"
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -10,6 +11,8 @@ namespace fs = std::filesystem;
 
 const  int width = 800;
 const unsigned int height = 800;
+
+bool isColliding = false;
 
 Vertex lightVertices[] =
 { //     COORDINATES     //
@@ -47,6 +50,8 @@ struct Object {
 	Model* model;          // 모델
 	Shader* shader;        // 각 오브젝트마다 다른 셰이더를 사용할 수 있도록 추가
 	float transparency;    // 투명도
+	bool isCollision;    // 투명도
+	float collisionStrength;    // 투명도
 };
 
 void OnFramebufferSizeChange(GLFWwindow* window, int width, int height) {
@@ -141,7 +146,6 @@ int main() {
 		Texture((parentDir + texPath + "Models/grey.png").c_str(), "diffuse", 0, GL_RED, GL_UNSIGNED_BYTE),
 	};
 
-
 	Texture face[]
 	{
 		//												IMAGE										TYPE		SLOT	FORMAT				PIXELTYPE	
@@ -153,7 +157,6 @@ int main() {
 	{
 		Texture((parentDir + texPath + "Models/Hair_Blue1.png").c_str(), "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
 	};
-
 
 	Shader shaderProgram("default.vert", "default.frag");
 	std::vector <Texture> mt_face(face, face + sizeof(face) / sizeof(Texture)); //std::vector <Texture> 는 Texture 타입의 객체를 담는 벡터
@@ -189,6 +192,8 @@ int main() {
 	obj1.model = m_face.get();
 	obj1.shader = &shaderProgram; // 기본 셰이더
 	obj1.transparency = 1.0f; // 불투명
+	obj1.isCollision = false;
+	obj1.collisionStrength = 0.0f;
 
 	Object obj5;
 	obj5.transform = glm::mat4(1.0f);
@@ -199,6 +204,8 @@ int main() {
 	obj5.model = m_eyeL.get();
 	obj5.shader = &shaderProgram; // 기본 셰이더
 	obj5.transparency = 1.0f; // 불투명
+	obj5.isCollision = false;
+	obj5.collisionStrength = 0.0f;
 
 	Object obj6;
 	obj6.transform = glm::mat4(1.0f);
@@ -209,6 +216,8 @@ int main() {
 	obj6.model = m_eyeR.get();
 	obj6.shader = &shaderProgram; // 기본 셰이더
 	obj6.transparency = 1.0f; // 불투명
+	obj6.isCollision = false;
+	obj6.collisionStrength = 0.0f;
 
 	Object obj2;
 	obj2.transform = glm::mat4(1.0f); // 초기화
@@ -219,6 +228,8 @@ int main() {
 	obj2.model = m_hair.get();
 	obj2.shader = &shaderProgram; // 기본 셰이더
 	obj2.transparency = 1.0f; // 불투명
+	obj2.isCollision = false;
+	obj2.collisionStrength = 0.0f;
 	
 	Object obj3;
 	obj3.transform = glm::mat4(1.0f); // 초기화
@@ -229,6 +240,8 @@ int main() {
 	obj3.model = m_convex.get();
 	obj3.shader = &shaderProgram; // 기본 셰이더
 	obj3.transparency = 0.5f; // 불투명
+	obj3.isCollision = true;
+	obj3.collisionStrength = 0.0f;
 	
 	Object obj4;
 	obj4.transform = glm::mat4(1.0f); // 초기화
@@ -239,6 +252,9 @@ int main() {
 	obj4.model = m_convex.get();
 	obj4.shader = &shaderProgram; // 기본 셰이더
 	obj4.transparency = 0.5f; // 불투명
+	obj4.isCollision = true;
+	obj4.collisionStrength = 0.0f;
+	
 
 	objects.push_back(obj1);
 	objects.push_back(obj2);
@@ -280,9 +296,39 @@ int main() {
 
 	glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
 
+	auto verticesA = obj3.model->getVertexPositions();
+	auto verticesB = obj4.model->getVertexPositions();
+	for (const auto& vertex : verticesA) {
+		std::cout << "Vertex A: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
+	}
+	for (const auto& vertex : verticesB) {
+		std::cout << "Vertex B: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
+	}
+
+	static int frameCounter = 0;
+	float distance = glm::length(obj3.position - obj4.position);
+
+	GJK gjk;
 	glm::vec2 joystickPosition(0.0f, 0.0f); // 조이스틱의 초기 위치 (중앙)
-	while (!glfwWindowShouldClose(window)) //메인 렌더링 루프문
+	while (!glfwWindowShouldClose(window)) //메인 렌더링 루프문 ---------------------------------------------------------------------------------------------
 	{
+		distance = glm::length(obj3.position - obj4.position);
+		if (distance > 2) {
+			isColliding = false;
+		}
+		else {
+			if (frameCounter % 5 == 0) {
+				isColliding = gjk.Gjk(obj3.model->getVertexPositions(), obj4.model->getVertexPositions());
+				if (isColliding) {
+					printf("두 도형이 충돌합니다.\n");
+				}
+				else {
+					printf("두 도형이 충돌하지 않습니다.\n");
+				}
+			}
+			frameCounter++;
+		}
+
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f); //배경색을 다시 설정
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // 버퍼를 초기화하여 배경색을 적용 및 뎁스 버퍼 초기화
 
@@ -301,13 +347,26 @@ int main() {
 		ImGui::SliderFloat("Transparency", &obj3.transparency, 0.0f, 1.0f);
 		ImGui::End();
 
+		// 충돌 색상 조절 슬라이더 UI 추가
+		ImGui::Begin("Collision Color Control for Rem's Convex Collision");
+		ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 위치 지정
+		ImGui::SetNextWindowSize(ImVec2(300.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 크기 지정
+		ImGui::SliderFloat("Color", &obj3.collisionStrength, 0.0f, 1.0f);
+		ImGui::End();
+
+		// 충돌 색상 조절 슬라이더 UI 추가
+		ImGui::Begin("Collision Color Control for Ryo's Convex Collision");
+		ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 위치 지정
+		ImGui::SetNextWindowSize(ImVec2(300.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 크기 지정
+		ImGui::SliderFloat("Color", &obj4.collisionStrength, 0.0f, 1.0f);
+		ImGui::End();
+
 		// 투명도 슬라이더 UI 추가
 		ImGui::Begin("Transparency Control for Ryo's Convex Collision");
 		ImGui::SetNextWindowPos(ImVec2(100.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 위치 지정
 		ImGui::SetNextWindowSize(ImVec2(300.0f, 100.0f), ImGuiCond_FirstUseEver); // 초기 크기 지정
 		ImGui::SliderFloat("Transparency", &obj4.transparency, 0.0f, 1.0f);
 		ImGui::End();
-
 		//glm::vec3 position = glm::vec3(obj3.transform[3]); // 현재 위치
 		//ImGui::Begin("Object Transform");
 		//ImGui::SliderFloat3(("Object " + std::to_string(i)).c_str(), glm::value_ptr(position), -10.0f, 10.0f);
@@ -339,7 +398,6 @@ int main() {
 		ImGui::Text("Joystick X: %.2f, Y: %.2f", joystickPosition.x, joystickPosition.y);
 		ImGui::End();
 
-
 		// 카메라나 오브젝트 이동
 		obj4.position.x += joystickPosition.x * 0.1f; // 예: x 방향 이동
 		obj4.position.z += joystickPosition.y * -0.1f; // 예: y 방향 이동
@@ -347,32 +405,41 @@ int main() {
 
 		light.Draw(lightShader, camera);
 
-
-
 		obj1.shader->Activate();
-		// 오브젝트의 트랜스폼 매트릭스 전달
 		glUniformMatrix4fv(glGetUniformLocation(obj1.shader->ID, "model"), 1, GL_FALSE, glm::value_ptr(obj1.transform));
+		// 충돌 관련 유니폼 초기화
+		glUniform1i(glGetUniformLocation(obj1.shader->ID, "isCollision"), false); // 초기화
+		glUniform1f(glGetUniformLocation(obj1.shader->ID, "transparency"), 1.0f); // 초기화
+		glUniform1f(glGetUniformLocation(obj1.shader->ID, "collisionStrength"), 0.0f); // 초기화
 		// 모델 렌더링
 		obj1.model->Draw(*obj1.shader, camera);
 
 		obj2.shader->Activate();
-		// 오브젝트의 트랜스폼 매트릭스 전달
 		glUniformMatrix4fv(glGetUniformLocation(obj2.shader->ID, "model"), 1, GL_FALSE, glm::value_ptr(obj2.transform));
+		// 충돌 관련 유니폼 초기화
+		glUniform1i(glGetUniformLocation(obj2.shader->ID, "isCollision"), false); // 초기화
+		glUniform1f(glGetUniformLocation(obj2.shader->ID, "transparency"), 1.0f); // 초기화
+		glUniform1f(glGetUniformLocation(obj2.shader->ID, "collisionStrength"), 0.0f); // 초기화
 		// 모델 렌더링
 		obj2.model->Draw(*obj2.shader, camera);
 
 		obj5.shader->Activate();
-		// 오브젝트의 트랜스폼 매트릭스 전달
 		glUniformMatrix4fv(glGetUniformLocation(obj5.shader->ID, "model"), 1, GL_FALSE, glm::value_ptr(obj5.transform));
+		// 충돌 관련 유니폼 초기화
+		glUniform1i(glGetUniformLocation(obj5.shader->ID, "isCollision"), false); // 초기화
+		glUniform1f(glGetUniformLocation(obj5.shader->ID, "transparency"), 1.0f); // 초기화
+		glUniform1f(glGetUniformLocation(obj5.shader->ID, "collisionStrength"), 0.0f); // 초기화
 		// 모델 렌더링
 		obj5.model->Draw(*obj5.shader, camera);
 
 		obj6.shader->Activate();
-		// 오브젝트의 트랜스폼 매트릭스 전달
 		glUniformMatrix4fv(glGetUniformLocation(obj6.shader->ID, "model"), 1, GL_FALSE, glm::value_ptr(obj6.transform));
+		// 충돌 관련 유니폼 초기화
+		glUniform1i(glGetUniformLocation(obj6.shader->ID, "isCollision"), false); // 초기화
+		glUniform1f(glGetUniformLocation(obj6.shader->ID, "transparency"), 1.0f); // 초기화
+		glUniform1f(glGetUniformLocation(obj6.shader->ID, "collisionStrength"), 0.0f); // 초기화
 		// 모델 렌더링
 		obj6.model->Draw(*obj6.shader, camera);
-
 
 		obj3.shader->Activate();
 		// 오브젝트의 트랜스폼 매트릭스 전달
@@ -381,6 +448,9 @@ int main() {
 		if (obj3.transparency < 1.0f) {
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glUniform1f(glGetUniformLocation(obj3.shader->ID, "collisionStrength"), obj3.collisionStrength);
+			// 충돌 여부 전달
+			glUniform1i(glGetUniformLocation(obj3.shader->ID, "isCollision"), obj3.isCollision);
 			glUniform1f(glGetUniformLocation(obj3.shader->ID, "transparency"), obj3.transparency);
 		}
 		// 모델 렌더링
@@ -397,6 +467,9 @@ int main() {
 		if (obj4.transparency < 1.0f) {
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glUniform1f(glGetUniformLocation(obj4.shader->ID, "collisionStrength"), obj4.collisionStrength);
+			// 충돌 여부 전달
+			glUniform1i(glGetUniformLocation(obj4.shader->ID, "isCollision"), obj4.isCollision);
 			glUniform1f(glGetUniformLocation(obj4.shader->ID, "transparency"), obj4.transparency);
 		}
 		// 모델 렌더링
@@ -430,7 +503,7 @@ int main() {
 		//}
 
 		ImGui::Begin("My game is window, ImGui window");
-		ImGui::Text("Hello");
+		ImGui::Text("Hello %.3lf, %.3lf, %.3lf || %.3lf", obj4.position.x, obj4.position.y, obj4.position.z, distance);
 		ImGui::End();
 
 		ImGui::Render();

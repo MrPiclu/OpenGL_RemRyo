@@ -16,6 +16,10 @@ class Mesh
 		std::vector <GLuint> indices; 
 		std::vector <Texture> textures; 
 
+		const std::vector <Vertex>& getVertices() const {
+			return vertices;
+		}
+
 		VAO VAO;
 
 		Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures);

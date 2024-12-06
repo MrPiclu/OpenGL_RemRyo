@@ -15,6 +15,9 @@
         Mesh GetMesh(int index) const { return m_meshes[index]; }
         void Draw(Shader& shader, Camera& camera) const;
 
+        std::vector<glm::vec3> getVertexPositions() const;
+
+
     private:
         Model() {}
         bool LoadByAssimp(const std::string& filename, std::vector<Texture> tex);
@@ -22,6 +25,7 @@
         void ProcessNode(aiNode* node, const aiScene* scene, std::vector<Texture> tex);
 
         std::vector<Mesh> m_meshes;
+        std::vector<Vertex> vertices;
 };
 
 #endif 

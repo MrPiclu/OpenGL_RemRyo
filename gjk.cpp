@@ -21,6 +21,7 @@ glm::vec3 GJK::Support(const std::vector<glm::vec3>& vertices, const glm::vec3& 
 glm::vec3 GJK::SupportMinkowski(const std::vector<glm::vec3>& verticesA, const std::vector<glm::vec3>& verticesB, const glm::vec3& direction) {
     glm::vec3 supportA = Support(verticesA, direction);
     glm::vec3 supportB = Support(verticesB, -direction);
+    printf("%.2lf - %.2lf____%d\n", supportA.x, supportB.x, verticesA.size());
     return supportA - supportB;
 }
 
@@ -45,6 +46,7 @@ bool GJK::Gjk(const std::vector<glm::vec3>& verticesA, const std::vector<glm::ve
         simplex.push_back(newPoint);
 
         if (HandleSimplex(simplex, direction)) {
+            printf("noooo\n");
             return true; // Collision detected
         }
     }

@@ -33,7 +33,6 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene, std::vector<Texture>
 
 void Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, std::vector<Texture> tex) {
 
-    std::vector<Vertex> vertices;
     vertices.resize(mesh->mNumVertices);
     for (uint32_t i = 0; i < mesh->mNumVertices; i++) {
         auto& v = vertices[i];
@@ -58,4 +57,13 @@ void Model::Draw(Shader & shader, Camera & camera) const {
     for (Mesh mesh : m_meshes) {
         mesh.Draw(shader, camera);
     }
+}
+
+std::vector<glm::vec3> Model::getVertexPositions() const {
+    std::vector<glm::vec3> positions;
+    positions.reserve(vertices.size());
+    for (const auto& vertex : vertices) {
+        positions.push_back(vertex.position);
+    }
+    return positions;
 }
