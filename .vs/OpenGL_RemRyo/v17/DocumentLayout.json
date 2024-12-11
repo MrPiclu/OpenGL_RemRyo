@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\gjk.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|solutionrelative:gjk.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\gjk.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|solutionrelative:gjk.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{951A401A-0C5E-481E-8E62-EDFA1A83D95B}|OpenGL_RemRyo.vcxproj|C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -51,26 +51,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "gjk.cpp",
               "DocumentMoniker": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\gjk.cpp",
               "RelativeDocumentMoniker": "gjk.cpp",
               "ToolTip": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\gjk.cpp",
               "RelativeToolTip": "gjk.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAowHMAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-25T16:12:54.712Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Main.cpp",
               "DocumentMoniker": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp",
               "RelativeDocumentMoniker": "Main.cpp",
               "ToolTip": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAABkBAAAAAAAAAAAAwCoBAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAsCAAAAAAAAAAAkwDECAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-11-22T09:03:28.984Z",
               "EditorCaption": ""
@@ -83,7 +83,7 @@
               "RelativeDocumentMoniker": "Model.cpp",
               "ToolTip": "C:\\Users\\KimLeeHyun\\Documents\\GitHub\\OpenGL_RemRyo\\Model.cpp",
               "RelativeToolTip": "Model.cpp",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwDwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAmwD0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-01T11:39:16.888Z",
               "EditorCaption": ""
@@ -98,8 +98,7 @@
               "RelativeToolTip": "Model.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-01T11:38:14.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T11:38:14.09Z"
             },
             {
               "$type": "Document",

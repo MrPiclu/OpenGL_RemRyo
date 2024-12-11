@@ -111,6 +111,15 @@ void DrawJoystick(const char* label, glm::vec2& joystickPos, float radius, float
 	drawList->AddCircleFilled(handlePos, radius * 0.3f, IM_COL32(255, 0, 0, 255)); // 조이스틱 핸들
 }
 
+std::vector<glm::vec3> transformToWorldCoordinates(const std::vector<glm::vec3> vertices, const Object obj) {
+	std::vector<glm::vec3> worldVertices;
+
+	for (const auto& vertex : vertices) {
+		worldVertices.push_back(vertex + obj.position);
+	}
+
+	return worldVertices;
+}
 
 int main() {
 
@@ -163,12 +172,12 @@ int main() {
 	std::vector <Texture> mt_hair(hair, hair + sizeof(hair) / sizeof(Texture)); //std::vector <Texture> 는 Texture 타입의 객체를 담는 벡터
 	std::vector <Texture> mt_default(defaultTexture, defaultTexture + sizeof(defaultTexture) / sizeof(Texture));
 
-	Shader lightShader("light.vert", "light.frag");
-	std::vector <Vertex> lightVerts(lightVertices, lightVertices + sizeof(lightVertices) / sizeof(Vertex)); // 배열의 시작 포인터 lightVertices와 배열의 끝 포인터 (lightvertices + 배열 크기)로 std::vector 초기화하여 배열의 모든 요소를 벡터에 복사함
-	std::vector <GLuint> lightInd(lightIndices, lightIndices + sizeof(lightIndices) / sizeof(GLuint));
-	Mesh light(lightVerts, lightInd, mt_face);
+	//Shader lightShader("light.vert", "light.frag");
+	//std::vector <Vertex> lightVerts(lightVertices, lightVertices + sizeof(lightVertices) / sizeof(Vertex)); // 배열의 시작 포인터 lightVertices와 배열의 끝 포인터 (lightvertices + 배열 크기)로 std::vector 초기화하여 배열의 모든 요소를 벡터에 복사함
+	//std::vector <GLuint> lightInd(lightIndices, lightIndices + sizeof(lightIndices) / sizeof(GLuint));
+	//Mesh light(lightVerts, lightInd, mt_face);
 
-	Shader convexShader("transparent.vert", "transparent.frag");
+	//Shader convexShader("transparent.vert", "transparent.frag");
 
 	std::unique_ptr<Model> m_face = Model::Load((parentDir + texPath + "Models/RemOriginFixed.obj").c_str(), mt_face);
 	if (!m_face) return false;
@@ -270,19 +279,19 @@ int main() {
 	glm::mat4 modelTrans = glm::mat4(1.0f);
 	modelTrans = glm::translate(modelTrans, modelPos);*/
 
-	lightShader.Activate(); // shader 활성화해서 glUniform 호출들이 lightshader에 적용되도록 함
-	// glUniformMatrix4fv(넘길 유니폼 변수, 행렬의 개수, 행렬 전치 필요 여부, 넘길 포인터 값)
-	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel)); //lightshader의 light.vert 의 유니폼 변수 model에 lightmodel 행렬 값을 넘김 (Matrix4fv를 넘김)
-	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w); //lightshader의 light.frag 의 유니폼 변수 lightColor에 lightColor vec4 값을 넘김
+	//lightShader.Activate(); // shader 활성화해서 glUniform 호출들이 lightshader에 적용되도록 함
+	//// glUniformMatrix4fv(넘길 유니폼 변수, 행렬의 개수, 행렬 전치 필요 여부, 넘길 포인터 값)
+	//glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel)); //lightshader의 light.vert 의 유니폼 변수 model에 lightmodel 행렬 값을 넘김 (Matrix4fv를 넘김)
+	//glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w); //lightshader의 light.frag 의 유니폼 변수 lightColor에 lightColor vec4 값을 넘김
 
 	shaderProgram.Activate();
-	// 광원의 정보를 물체에 전달
-	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	//// 광원의 정보를 물체에 전달
+	//glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	//glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
-	convexShader.Activate();
-	glUniform4f(glGetUniformLocation(convexShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
-	glUniform3f(glGetUniformLocation(convexShader.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	//convexShader.Activate();
+	//glUniform4f(glGetUniformLocation(convexShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
+	//glUniform3f(glGetUniformLocation(convexShader.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
 	glEnable(GL_DEPTH_TEST); //3D 모델의 뎁스 설정
@@ -296,14 +305,18 @@ int main() {
 
 	glfwSetFramebufferSizeCallback(window, OnFramebufferSizeChange);
 
-	auto verticesA = obj3.model->getVertexPositions();
+	/*auto verticesA = obj3.model->getVertexPositions();
 	auto verticesB = obj4.model->getVertexPositions();
-	for (const auto& vertex : verticesA) {
+
+	auto worldVerticesA = transformToWorldCoordinates(verticesA, obj3);
+	auto worldVerticesB = transformToWorldCoordinates(verticesB, obj4);
+
+	for (const auto& vertex : worldVerticesA) {
 		std::cout << "Vertex A: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
 	}
-	for (const auto& vertex : verticesB) {
+	for (const auto& vertex : worldVerticesB) {
 		std::cout << "Vertex B: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
-	}
+	}*/
 
 	static int frameCounter = 0;
 	float distance = glm::length(obj3.position - obj4.position);
@@ -312,18 +325,28 @@ int main() {
 	glm::vec2 joystickPosition(0.0f, 0.0f); // 조이스틱의 초기 위치 (중앙)
 	while (!glfwWindowShouldClose(window)) //메인 렌더링 루프문 ---------------------------------------------------------------------------------------------
 	{
+		static bool togglePrint = false; // 버튼 상태를 위한 boolean 변수
+		float tempStrength = obj3.collisionStrength;
+
+		auto verticesA = obj3.model->getVertexPositions();
+		auto verticesB = obj4.model->getVertexPositions();
+		auto worldVerticesA = transformToWorldCoordinates(verticesA, obj3);
+		auto worldVerticesB = transformToWorldCoordinates(verticesB, obj4);
 		distance = glm::length(obj3.position - obj4.position);
 		if (distance > 2) {
 			isColliding = false;
 		}
 		else {
-			if (frameCounter % 5 == 0) {
-				isColliding = gjk.Gjk(obj3.model->getVertexPositions(), obj4.model->getVertexPositions());
+			if (frameCounter % 30 == 0) {
+				isColliding = gjk.Gjk(worldVerticesA, worldVerticesB); // GJK 알고리즘 수행
 				if (isColliding) {
 					printf("두 도형이 충돌합니다.\n");
+					tempStrength = obj3.collisionStrength;
+					obj3.collisionStrength = 0.7f;
 				}
 				else {
 					printf("두 도형이 충돌하지 않습니다.\n");
+					obj3.collisionStrength = 0.0f;
 				}
 			}
 			frameCounter++;
@@ -398,12 +421,45 @@ int main() {
 		ImGui::Text("Joystick X: %.2f, Y: %.2f", joystickPosition.x, joystickPosition.y);
 		ImGui::End();
 
+		// 조이스틱 UI
+		ImGui::Begin("Check Vertex Position");
+		if (ImGui::Button("Print Vertex A (Rem's)")) {
+			// 버튼 클릭 시 toggleTransparency 상태 전환
+			togglePrint = !togglePrint;
+
+			// 상태에 따라 투명도 설정
+			if (togglePrint) {
+				for (const auto& vertex : worldVerticesA) {
+					std::cout << "Vertex A: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
+				}
+				togglePrint = false;
+			}
+		}
+		ImGui::End();
+
+
+		// 조이스틱 UI
+		ImGui::Begin("Check Vertex Position");
+		if (ImGui::Button("Print Vertex B (Ryo's)")) {
+			// 버튼 클릭 시 toggleTransparency 상태 전환
+			togglePrint = !togglePrint;
+
+			// 상태에 따라 투명도 설정
+			if (togglePrint) {
+				for (const auto& vertex : worldVerticesB) {
+					std::cout << "Vertex B: " << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl;
+				}
+				togglePrint = false;
+			}
+		}
+		ImGui::End();
+
 		// 카메라나 오브젝트 이동
 		obj4.position.x += joystickPosition.x * 0.1f; // 예: x 방향 이동
 		obj4.position.z += joystickPosition.y * -0.1f; // 예: y 방향 이동
 		obj4.transform = glm::translate(glm::mat4(1.0f), obj4.position);
 
-		light.Draw(lightShader, camera);
+		//light.Draw(lightShader, camera);
 
 		obj1.shader->Activate();
 		glUniformMatrix4fv(glGetUniformLocation(obj1.shader->ID, "model"), 1, GL_FALSE, glm::value_ptr(obj1.transform));
@@ -502,9 +558,9 @@ int main() {
 		//	}
 		//}
 
-		ImGui::Begin("My game is window, ImGui window");
-		ImGui::Text("Hello %.3lf, %.3lf, %.3lf || %.3lf", obj4.position.x, obj4.position.y, obj4.position.z, distance);
-		ImGui::End();
+		//ImGui::Begin("My game is window, ImGui window");
+		//ImGui::Text("Hello %.3lf, %.3lf, %.3lf || %.3lf", obj4.position.x, obj4.position.y, obj4.position.z, distance);
+		//ImGui::End();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -518,7 +574,7 @@ int main() {
 	ImGui::DestroyContext();
 
 	shaderProgram.Delete();
-	lightShader.Delete();
+	//lightShader.Delete();
 
 	glfwDestroyWindow(window);
 	glfwTerminate(); //창 종료
