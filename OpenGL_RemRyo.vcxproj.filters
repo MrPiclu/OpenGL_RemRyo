@@ -205,9 +205,6 @@
     <Image Include="..\..\Downloads\backpack\diffuse.jpg">
       <Filter>리소스 파일\Models</Filter>
     </Image>
-    <Image Include="..\..\Downloads\backpack\normal.png">
-      <Filter>리소스 파일\Models</Filter>
-    </Image>
     <Image Include="..\..\Downloads\backpack\roughness.jpg">
       <Filter>리소스 파일\Models</Filter>
     </Image>

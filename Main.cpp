@@ -416,7 +416,7 @@ int main() {
 
 
 		// 조이스틱 UI
-		ImGui::Begin("Joystick Control");
+		ImGui::Begin("Move Collision Sphere");
 		DrawJoystick("Joystick", joystickPosition, 50.0f, 0.1f);
 		ImGui::Text("Joystick X: %.2f, Y: %.2f", joystickPosition.x, joystickPosition.y);
 		ImGui::End();
@@ -558,9 +558,22 @@ int main() {
 		//	}
 		//}
 
-		//ImGui::Begin("My game is window, ImGui window");
-		//ImGui::Text("Hello %.3lf, %.3lf, %.3lf || %.3lf", obj4.position.x, obj4.position.y, obj4.position.z, distance);
-		//ImGui::End();
+		ImGui::Begin("Rem: ");
+		if (isColliding) {
+			ImGui::Text("Ouch!!!!");
+		}
+		else {
+			ImGui::Text("Hello!! %.3lf, %.3lf, %.3lf || %.3lf", obj4.position.x, obj4.position.y, obj4.position.z, distance);
+		}
+		ImGui::End();
+
+		ImGui::Begin("How to Move: ");
+		ImGui::Text("W S A D");
+		ImGui::Text("Up : SPACE");
+		ImGui::Text("Down : CTRL");
+		ImGui::Text("Camera : RMB");
+		ImGui::Text("Slow : SHIFT");
+		ImGui::End();
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

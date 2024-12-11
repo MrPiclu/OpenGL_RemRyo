@@ -212,7 +212,6 @@
   <ItemGroup>
     <Image Include="..\..\Downloads\backpack\ao.jpg" />
     <Image Include="..\..\Downloads\backpack\diffuse.jpg" />
-    <Image Include="..\..\Downloads\backpack\normal.png" />
     <Image Include="..\..\Downloads\backpack\roughness.jpg" />
     <Image Include="..\..\Downloads\backpack\specular.jpg" />
     <Image Include="..\..\Downloads\ryo.jpg" />
